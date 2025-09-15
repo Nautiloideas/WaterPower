@@ -25,8 +25,8 @@ abstract class ItemMeta(id: String) : ItemBase(id) {
 
     @SideOnly(Side.CLIENT)
     open fun getTextureName(meta: Int) =
-            if (hasSubtypes) getUnlocalizedName(getItemStack(meta))
-            else if (meta == 0) getUnlocalizedName()
+            if (hasSubtypes) getTranslationKey(getItemStack(meta))
+            else if (meta == 0) translationKey
             else null
 
     @SideOnly(Side.CLIENT)
@@ -69,10 +69,10 @@ abstract class ItemMeta(id: String) : ItemBase(id) {
     }
 
     open fun stopScanning(stack: ItemStack): Boolean
-            = getUnlocalizedName(stack) == null
+            = getTranslationKey(stack) == null
 
     open fun validStack(stack: ItemStack): Boolean
-            = getUnlocalizedName(stack) != null
+            = getTranslationKey(stack) != null
 
     open fun getItemStack(meta: Int, amount: Int = 1)
             = ItemStack(this, amount, meta)

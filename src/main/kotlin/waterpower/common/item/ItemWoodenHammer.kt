@@ -24,7 +24,7 @@ import waterpower.util.generalize
 class ItemWoodenHammer() : ItemTool("wooden_hammer", 20), IItemIconProvider, IIconRegister {
 
     init {
-        unlocalizedName = "waterpower.crafting.wooden_hammer"
+        translationKey = "waterpower.crafting.wooden_hammer"
 
         WPItems.hammerItem = this
         WPItems.hammer = ItemStack(this).generalize()

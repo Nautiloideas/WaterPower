@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 buildscript {
     repositories {
         mavenCentral()
@@ -15,6 +17,7 @@ buildscript {
 }
 
 apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: "org.jetbrains.kotlin.jvm"
 //Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 
 file "build.properties" withReader {
@@ -97,4 +100,8 @@ processResources {
 
 sourceSets {
     main.java.srcDirs += 'src/main/kotlin'
+}
+
+tasks.withType(KotlinCompile).configureEach {
+    kotlinOptions.jvmTarget = "1.8"
 }

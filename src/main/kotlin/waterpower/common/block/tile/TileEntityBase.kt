@@ -37,7 +37,7 @@ open class TileEntityBase : TileEntity(), ITickable {
     @Flag protected var renderUpdate = false
 
     fun isRedstonePowered() =
-            this.world.isBlockIndirectlyGettingPowered(this.pos) > 0
+            this.world.isBlockPowered(this.pos)
 
     fun isServerSide() = !getWorld().isRemote
 
@@ -201,7 +201,7 @@ open class TileEntityBase : TileEntity(), ITickable {
             val packet = PacketTileEntity(this)
             packet.tag = NBTTagCompound()
             val flag = writePacketData(packet.tag as NBTTagCompound, force)
-            if (flag && !packet.tag!!.hasNoTags())
+            if (flag && !packet.tag!!.isEmpty)
                 NetworkHandler.instance.sendToAll(packet)
         }
     }

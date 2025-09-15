@@ -118,7 +118,7 @@ open class TileEntityReservoir(val type: Reservoirs) : TileEntityMultiBlock<Tile
     }
 
     val biomeID: String by lazy {
-        Biome.REGISTRY.getNameForObject(world.getBiomeForCoordsBody(pos))?.resourcePath?.toLowerCase() ?: ""
+        Biome.REGISTRY.getNameForObject(world.getBiomeForCoordsBody(pos))?.path?.toLowerCase() ?: ""
     }
 
     override fun onUpdate() {

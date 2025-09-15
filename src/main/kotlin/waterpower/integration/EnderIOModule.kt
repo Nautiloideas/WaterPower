@@ -31,7 +31,7 @@ object EnderIOModule : IModule() {
             else WaterPower.logger.warn("Unknown recipe input: ${x}, please contact with the mod author")
         val value = String.format("<recipeGroup name=\"WaterPower\">" + "<recipe name=\"%s\" energyCost=\"10000\">" + "<input>" + list + "</input>"
                 + "<output>" + "<itemStack modID=\"%s\" itemName=\"%s\" itemMeta=\"%s\" exp=\"1\" number=\"%d\" />" + "</output>" + "</recipe>"
-                + "</recipeGroup>", name, WaterPower.MOD_ID, o.item.delegate.name().resourcePath, o.itemDamage, getCount(o))
+                + "</recipeGroup>", name, WaterPower.MOD_ID, o.item.delegate.name().path, o.itemDamage, getCount(o))
         return FMLInterModComms.sendMessage(IDs.EnderIO, "recipe:alloysmelter", value)
     }
 

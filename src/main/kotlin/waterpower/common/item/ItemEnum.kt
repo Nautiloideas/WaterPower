@@ -33,7 +33,7 @@ where T : Enum<T>, T : INameable {
             else
                 types[stack.itemDamage].getLocalizedName()
 
-    override fun getUnlocalizedName(stack: ItemStack) =
+    override fun getTranslationKey(stack: ItemStack) =
             if (stack.itemDamage >= types.size)
                 null
             else

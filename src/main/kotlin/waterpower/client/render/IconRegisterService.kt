@@ -315,9 +315,9 @@ object IconRegisterService : IBakedModel, IModel {
                     if (format.getElement(e).index == 0)
                         builder.put(e, u, v, 0f, 1f)
                     else
-                        builder.put(e, side.frontOffsetX.toFloat(), side.frontOffsetY.toFloat(), side.frontOffsetZ.toFloat(), 0f)
+                        builder.put(e, side.xOffset.toFloat(), side.yOffset.toFloat(), side.zOffset.toFloat(), 0f)
                 }
-                VertexFormatElement.EnumUsage.NORMAL -> builder.put(e, side.frontOffsetX.toFloat(), side.frontOffsetY.toFloat(), side.frontOffsetZ.toFloat(), 0f)
+                VertexFormatElement.EnumUsage.NORMAL -> builder.put(e, side.xOffset.toFloat(), side.yOffset.toFloat(), side.zOffset.toFloat(), 0f)
                 else -> builder.put(e)
             }
         }

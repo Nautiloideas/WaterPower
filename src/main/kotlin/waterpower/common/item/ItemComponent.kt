@@ -65,7 +65,7 @@ class ItemComponent : ItemColorable("component") {
                 .replace("{level}", getLevelFromMeta(meta).getLocalizedName())
     }
 
-    override fun getUnlocalizedName(stack: ItemStack): String {
+    override fun getTranslationKey(stack: ItemStack): String {
         val meta = stack.itemDamage
         return "waterpower.${getLevelFromMeta(meta).name}.${getFormFromMeta(meta).name}"
     }

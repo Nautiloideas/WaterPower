@@ -1,10 +1,3 @@
-/**
- * Copyright (c) Huang Yuhui, 2017
- *
- * "WaterPower" is distributed under the terms of the Minecraft Mod Public
- * License 1.0, or MMPL. Please check the contents of the license located in
- * http://www.mod-buildcraft.com/MMPL-1.0.txt
- */
 package waterpower.client
 
 import net.minecraft.creativetab.CreativeTabs
@@ -13,7 +6,9 @@ import waterpower.common.block.watermill.EnumWatermill
 import waterpower.common.init.WPBlocks
 
 class CreativeTabWaterPower(label: String) : CreativeTabs(label) {
-    override fun getTabIconItem(): ItemStack = WPBlocks.watermill.getItemStack(EnumWatermill.MK1)
 
-    override fun getIconItemStack(): ItemStack = WPBlocks.watermill.getItemStack(EnumWatermill.MK1)
+    override fun createIcon(): ItemStack {
+        // 返回 MOD 的物品作为图标
+        return WPBlocks.watermill.getItemStack(EnumWatermill.MK1)
+    }
 }

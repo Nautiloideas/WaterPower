@@ -7,9 +7,9 @@
  */
 package waterpower.common.block.attachment
 
-import buildcraft.api.mj.IMjConnector
-import buildcraft.api.mj.IMjReceiver
 import buildcraft.api.mj.MjAPI
+import buildcraft.api.mj.IMjReceiver
+import buildcraft.api.mj.IMjConnector
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.EnumFacing
 import waterpower.common.Energy
@@ -23,9 +23,8 @@ class AttachmentMJ(master: TileEntityBase, val energyStorage: EnergyStorage) : T
     override fun onLoaded() {
         super.onLoaded()
 
-        runIgnoringThrowables {
-            mjConnector = IMjConnector { it is IMjReceiver && it.canReceive() }
-        }
+        // BuildCraft 8.0.0 使用Capability系统，不再需要单独的mjConnector
+        // MJ能源传输现在通过MjAPI.ENERGY Capability处理
     }
 
     override fun onTick() {
@@ -37,12 +36,13 @@ class AttachmentMJ(master: TileEntityBase, val energyStorage: EnergyStorage) : T
         }
     }
 
-    fun getReceiverToPower(tile: TileEntity?, side: EnumFacing): Any? {
+    fun getReceiverToPower(tile: TileEntity?, side: EnumFacing): IMjReceiver? {
         if (tile == null) {
             return null
         } else {
-            val rec = tile.getCapability(MjAPI.CAP_RECEIVER, side.opposite)
-            return if (rec != null && rec.canConnect(this.mjConnector as IMjConnector)) rec else null
+            // BuildCraft 8.0.0 使用MjAPI.CAP_RECEIVER Capability
+            val energyHandler = tile.getCapability(MjAPI.CAP_RECEIVER, side.opposite)
+            return energyHandler
         }
     }
 
@@ -56,7 +56,11 @@ class AttachmentMJ(master: TileEntityBase, val energyStorage: EnergyStorage) : T
         } else {
             val receiver = this.getReceiverToPower(tile, facing)
             return if (receiver == null) 0L
-            else energyStorage.extractEnergy(Energy.MJ2EU((receiver as IMjReceiver).powerRequested.toDouble()), doExtract).toLong()
+            else {
+                // BuildCraft 8.0.0 中能源需求通过不同方式获取
+                val requested = receiver.powerRequested // 获取需求的能量
+                energyStorage.extractEnergy(Energy.MJ2EU(requested.toDouble()), doExtract).toLong()
+            }
         }
     }
 
@@ -65,10 +69,19 @@ class AttachmentMJ(master: TileEntityBase, val energyStorage: EnergyStorage) : T
         if (tile != null) {
             val receiver = this.getReceiverToPower(tile, facing)
             if (receiver != null) {
-                val extracted = this.getPowerToExtract(facing, true)
-                if (extracted > 0L && receiver is IMjReceiver) {
-                    val excess = receiver.receivePower(extracted, false)
-                    energyStorage.extractEnergy(Energy.MJ2EU((extracted - excess).toDouble()), true)
+                // 获取可发送的能量
+                val availableEnergy = energyStorage.getEnergyStored()
+                if (availableEnergy > 0) {
+                    // 转换为MJ (1 EU = 0.25 MJ，所以需要足够的EU)
+                    val mjToSend = Energy.EU2MJ(availableEnergy.toDouble()).toLong()
+                    if (mjToSend > 0) {
+                        // BuildCraft 8.0.0 能源传输
+                        val accepted = receiver.receivePower(mjToSend, false)
+                        if (accepted > 0) {
+                            val euConsumed = Energy.MJ2EU(accepted.toDouble())
+                            energyStorage.extractEnergy(euConsumed, true)
+                        }
+                    }
                 }
             }
         }

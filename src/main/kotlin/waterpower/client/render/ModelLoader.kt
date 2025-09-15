@@ -29,8 +29,8 @@ object ModelLoader : ICustomModelLoader {
     }
 
     override fun accepts(modelLocation: ResourceLocation): Boolean {
-        if (modelLocation.resourcePath.contains("models/item/")) {
-            val loc = ResourceLocation(modelLocation.resourceDomain, modelLocation.resourcePath.replace("models/item/", ""))
+        if (modelLocation.path.contains("models/item/")) {
+            val loc = ResourceLocation(modelLocation.namespace, modelLocation.path.replace("models/item/", ""))
             return WPItems.registryNames.contains(loc);
         } else return false
     }

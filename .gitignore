@@ -23,3 +23,5 @@ run
 .cursorindexingignore
 .cursorrules
 .specstory/*
+*.md
+!README.md

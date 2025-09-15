@@ -28,7 +28,7 @@ where T : Enum<T>, T : INameable, T : IStringSerializable {
             if (damage < blockEnum.maxMetaData()) damage
             else 0
 
-    override fun getUnlocalizedName(stack: ItemStack) =
+    override fun getTranslationKey(stack: ItemStack) =
             if (stack.itemDamage >= types.size) null
             else types[stack.itemDamage].getUnlocalizedName()
 

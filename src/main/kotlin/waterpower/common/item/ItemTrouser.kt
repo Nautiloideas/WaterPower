@@ -44,7 +44,7 @@ class ItemTrouser(val type: EnumWatermill) : ItemArmor(ItemArmor.ArmorMaterial.D
     var saved = 0.0
 
     init {
-        unlocalizedName = "waterpower.trouser.${type.getName()}"
+        translationKey = "waterpower.trouser.${type.getName()}"
         creativeTab = WaterPower.creativeTab
         hasSubtypes = true
 
@@ -93,7 +93,7 @@ class ItemTrouser(val type: EnumWatermill) : ItemArmor(ItemArmor.ArmorMaterial.D
         if (world.isRemote)
             return
         var percent = 0.0
-        val biomeId = Biome.REGISTRY.getNameForObject(world.getBiomeForCoordsBody(player.position))?.resourcePath?.toLowerCase() ?: ""
+        val biomeId = Biome.REGISTRY.getNameForObject(world.getBiomeForCoordsBody(player.position))?.path?.toLowerCase() ?: ""
         val (weather, acquirement) = getWaterIncomeAndExpenseByBiome(player.world, biomeId)
         percent += acquirement * weather / 10.0
 

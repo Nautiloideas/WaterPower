@@ -20,7 +20,7 @@ import waterpower.common.item.ItemColorable
 @SideOnly(Side.CLIENT)
 object ItemColor : IItemColor {
 
-    override fun getColorFromItemstack(stack: ItemStack, tintIndex: Int): Int {
+    override fun colorMultiplier(stack: ItemStack, tintIndex: Int): Int {
         if (stack.item is ItemColorable)
             return (stack.item as ItemColorable).getColorFromItemStack(stack, tintIndex)
         return 0

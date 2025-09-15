@@ -70,7 +70,7 @@ class ItemMaterial() : ItemColorable("material") {
                 .replace("{material}", getTypeFromMeta(meta).getLocalizedName())
     }
 
-    override fun getUnlocalizedName(stack: ItemStack): String {
+    override fun getTranslationKey(stack: ItemStack): String {
         val meta = stack.itemDamage
         return "waterpower.${getTypeFromMeta(meta).name}.${getFormFromMeta(meta).name}"
     }

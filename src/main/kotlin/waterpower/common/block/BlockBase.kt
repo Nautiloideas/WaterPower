@@ -41,7 +41,7 @@ typealias ItemBlockProvider = (BlockBase) -> ItemBlock
 abstract class BlockBase(id: String, material: Material, item: ItemBlockProvider) : Block(material) {
 
     init {
-        unlocalizedName = id
+        translationKey = id
         setCreativeTab(WaterPower.creativeTab)
         setHardness(3.0f)
 

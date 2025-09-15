@@ -202,4 +202,11 @@ abstract class TileEntityGenerator(production: Int, maxStorage: Double, tier: In
         else
             return false
     }
+
+    // 实现IKineticSource接口所需的方法
+    @Optional.Method(modid = IDs.IndustrialCraft2)
+    override fun getConnectionBandwidth(side: EnumFacing?): Int {
+        // 返回能源连接带宽，通常基于生产等级
+        return 32 // 32 EU/t 是一个合理的默认值
+    }
 }

@@ -18,8 +18,9 @@ import waterpower.annotations.Integration
 object BuildCraftModule : IModule() {
     fun isWrench(player: EntityPlayer, stack: ItemStack, hand: EnumHand, rayTrace: RayTraceResult?): Boolean {
         try {
-            if (stack.item is IToolWrench)
+            if (stack.item is IToolWrench) {
                 return (stack.item as IToolWrench).canWrench(player, hand, stack, rayTrace)
+            }
         } catch(ignore: Throwable) {
         }
         return false

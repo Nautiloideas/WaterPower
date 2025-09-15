@@ -16,7 +16,7 @@ import waterpower.common.init.WPItems
 abstract class ItemBase(id: String) : Item() {
     init {
         creativeTab = WaterPower.creativeTab
-        unlocalizedName = "waterpower." + id
+        translationKey = "waterpower." + id
         setNoRepair()
 
         setRegistryName(id)

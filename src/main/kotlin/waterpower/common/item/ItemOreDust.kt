@@ -48,7 +48,7 @@ class ItemOreDust() : ItemColorable("crushed") {
     override fun getItemStackDisplayName(stack: ItemStack)
             = i18n("waterpower.crushed." + Ores.values()[stack.itemDamage].getName())
 
-    override fun getUnlocalizedName(stack: ItemStack) =
+    override fun getTranslationKey(stack: ItemStack) =
             if (stack.itemDamage >= Ores.values().size)
                 null
             else

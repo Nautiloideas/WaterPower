@@ -1,6 +1,6 @@
 [
   {
-    "modid": "WaterPower",
+    "modid": "waterpower",
     "name": "WaterPower",
     "description": "Adds many watermills(support RF,EU,Steam&Water), reservoirs, trousers, machines, materials.",
     "version": "${version}",
