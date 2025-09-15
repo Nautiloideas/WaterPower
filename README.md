@@ -9,7 +9,7 @@ WaterPower是一个基于Forge的模组，使用Forgelin为Forge提供Kotlin语�
 ## 项目信息
 
 - **Minecraft版本**: 1.12.2
-- **Forge版本**: 14.23.5.2860
+- **Forge版本**: 14.23.5.2847
 - **开发语言**: Kotlin 1.3.72
 - **MOD版本**: 0.5.9
 
@@ -185,7 +185,7 @@ src/main/kotlin/waterpower/
 ## 更新日志
 
 ### 2025/09/15 当前版本 0.5.9 
-- Forge版本升级至14.23.5.2860
+- 更新BC、Hwyla、IC2、JEI、RedstoneFlux、RFtool等包
 - 修复升级后的兼容性问题及编译错误
 
 
